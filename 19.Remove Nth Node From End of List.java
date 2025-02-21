@@ -25,7 +25,8 @@ class Solution {
         // still not clear why is to use dummy head better and when should i use dummy head?
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
-        ListNode x = findFromBack(dummy, n + 1); // because i add dummy head, so it is actually (k+1)-th position from back, we count from dummy (-1)
+        ListNode x = findFromBack(dummy, n + 1); // because we add dummy head, so the "head" of the list is dummy
+        // how do we remove the n-th node from the end? we find the (n+1)-th node first and use (n+1)th.next = (n+1)th.next.next, you see the next line
         x.next = x.next.next; // why is .next -> .next.next not ...?
 
         return dummy.next; // why not head?
