@@ -25,38 +25,45 @@ import java.security.PKCS12Attribute;
  * }
  */
 class Solution {
-    /**
-     * 1. create two new lists, one to contain greater than or equal to x, another to contain less than x
-     * 2. 
+    /*
+     * consideration:
+     * 1. partition the list into two lists, one with value less than x and the other greater or equal than x
+     * 2. merge the lists
      */
     public ListNode partition(ListNode head, int x) {
-        // we need two lists, one to contain nodes which value is less than x and another one greater than or equal to x
-        // after we divide original list into two lists and then we connect two together into one
+
+        // 1. dummy node for two new lists
         ListNode dummy1 = new ListNode(-1);
         ListNode dummy2 = new ListNode(-1);
-        // use p1 and p2 to move when the two lists grow (dummy node don't move, fixed as "head" node)
-        ListNode p1 = dummy1;
-        ListNode p2 = dummy2;
 
+        // 2. moving pointers: p1 and p2
+        ListNode p1 = dummy1; // value less than x
+        ListNode p2 = dummy2; // value greater or equal than x
+
+        // 3. pointer p for original list
         ListNode p = head; // use p to track the original linked list
 
-        while (p != null) {
+        // 4. design the loop
+        // 4.1 when would the loop stop?
+        while (p != null) { // loop ending requirement
             if (p.val >= x) {
-                p2.next = p; // connect p2 and p = p2's next points to p
-                p2 = p2.next; // move p2 to next node
+                p2.next = p; // append p to p2 (the whole original list will be appended)
+                p2 = p2.next; // move p2 to the next
             } else {
-                p1.next = p;
-                p1 = p1.next;
+                p1.next = p; // append p to p1 (the whole original list will be appended)
+                p1 = p1.next; // move p2 to the next
             }
             
-            // why can't do this? after p1.next = p or p2.next = p, what actually happens? we append p to p1 or p2, right. And assume we had p1.next = p and move to next while loop, what will happend if this time p2.next = p? my original list was appended into p1 list, if we do p2.next = p, then you will get p2 connect with (p1, p) list, because p1 and p now are one list. So to solve this problem, we have to cut the p before we do p2.next = p.
-            // p = p.next;
-
-            // p (current) node has been given to p1 or p2, because we knew it's value comparasion result
+            // 5. cut the original list from p1 or p2
             ListNode temp = p.next;
             p.next = null; // cut the temp out
             p = temp; // set new p
+
+            // ???
+            // why can't do this? after p1.next = p or p2.next = p, what actually happens? we append p to p1 or p2, right. And assume we had p1.next = p and move to next while loop, what will happend if this time p2.next = p? my original list was appended into p1 list, if we do p2.next = p, then you will get p2 connect with (p1, p) list, because p1 and p now are one list. So to solve this problem, we have to cut the p before we do p2.next = p.
+            // p = p.next;
         }
+        // 6. merge two lists (l1 + l2)
         // how to connect two lists? connect p1 with the (actual) head node of p2, so it's dummy2.next (that's also the advantage of using dummy node, it's easy to find head node of list)
         p1.next = dummy2.next;
 
