@@ -6,6 +6,11 @@
 
 ![image-20250724094336747](./assets/leetcode.assets/image-20250724094336747.png)
 
+1. traverse the original list
+2. move the node with value less than x to the list 1 (l1)
+3. move the node with value greater or equal than x to the list 2 (l2)
+4. merge two lists (like 21)
+
 
 ## 23 Merge k sorted lists
 
@@ -95,6 +100,12 @@ How can we find the k-th node from back of the single linked list?
 >
 > Quote from: labuladong.online
 
+## 876 Middle of the linked list
+
+- using slow and fast pointer
+- fast pointer move two times faster than slow pointer
+- when fast pointer arrive the end (last node or the node after last node)
+- the slow one arrive at the middle or the second of the middle if there are two
 
 
 ## 234 palindrome of linked list
