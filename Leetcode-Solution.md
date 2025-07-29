@@ -76,7 +76,7 @@ How can we find the k-th node from back of the single linked list?
       # 1. get two pointers 
       p1 = head
       p2 = head
-
+  
       # 2. let p1 move k steps
       for i in range(k):
           p1 = p1.next
@@ -107,6 +107,22 @@ How can we find the k-th node from back of the single linked list?
 - when fast pointer arrive the end (last node or the node after last node)
 - the slow one arrive at the middle or the second of the middle if there are two
 
+
+## 141 Linked list cycle I
+
+- using slow and fast pointer
+- if fast pointer can meet slow, it indicates there is a cycle
+
+## 141 Linked list cycle II
+
+- not only check if there is a cycle, but also to know where the cycle starts
+- there is cycle
+  - when slow and fast pointer meet, it means that fast has gone k more steps than slow
+  - k must be a multiple of the cycle's length
+  - let's say cycle start is m steps away from the meeting point
+  - when anyone of slow or fast continue to go for k-m steps, it will arrive at the cycle start
+  - we set the slow or fast to the head, and let two pointers start to walk and when they meet it's the cycle start
+  - ![img](https://labuladong.online/algo/images/linked-two-pointer/2-en.jpeg)
 
 ## 234 palindrome of linked list
 
